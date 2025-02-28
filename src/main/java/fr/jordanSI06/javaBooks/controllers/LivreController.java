@@ -4,7 +4,6 @@ import fr.jordanSI06.javaBooks.models.Livre;
 import fr.jordanSI06.javaBooks.services.LivreService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/livres")
@@ -21,7 +20,7 @@ public class LivreController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Livre> getLivreById(@PathVariable Long id) {
+    public Livre getLivreById(@PathVariable Long id) {
         return livreService.getLivreById(id);
     }
 

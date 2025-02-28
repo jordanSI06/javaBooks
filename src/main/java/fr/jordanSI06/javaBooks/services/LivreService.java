@@ -2,9 +2,11 @@ package fr.jordanSI06.javaBooks.services;
 
 import fr.jordanSI06.javaBooks.models.Livre;
 import fr.jordanSI06.javaBooks.repositories.LivreRepository;
+import fr.jordanSI06.javaBooks.exceptions.LivreNonTrouveException;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
+
+
 
 @Service
 public class LivreService {
@@ -18,8 +20,9 @@ public class LivreService {
         return livreRepository.findAll();
     }
 
-    public Optional<Livre> getLivreById(Long id) {
-        return livreRepository.findById(id);
+    public Livre getLivreById(Long id) {
+        return livreRepository.findById(id).orElseThrow(() -> new LivreNonTrouveException("Livre avec l'ID " + id + " introuvable."));
+
     }
 
     public Livre ajouterLivre(Livre livre) {
@@ -29,4 +32,6 @@ public class LivreService {
     public void supprimerLivre(Long id) {
         livreRepository.deleteById(id);
     }
+
+    
 }
