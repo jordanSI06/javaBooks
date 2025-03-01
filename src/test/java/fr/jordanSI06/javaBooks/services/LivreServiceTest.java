@@ -1,5 +1,6 @@
 package fr.jordanSI06.javaBooks.services;
 
+import fr.jordanSI06.javaBooks.exceptions.LivreNonTrouveException;
 import fr.jordanSI06.javaBooks.models.Livre;
 import fr.jordanSI06.javaBooks.repositories.LivreRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -44,7 +45,7 @@ class LivreServiceTest {
     void getLivreById_notFound() {
         when(livreRepository.findById(1L)).thenReturn(Optional.empty());
 
-        Exception exception = assertThrows(RuntimeException.class, () -> {
+        Exception exception = assertThrows(LivreNonTrouveException.class, () -> {
             livreService.getLivreById(1L);
         });
 
@@ -59,5 +60,37 @@ class LivreServiceTest {
 
         assertNotNull(result);
         assertEquals("Dune", result.getTitre());
+    }
+
+    @Test
+    void getLivreByIsbn_notFound() {
+        when(livreRepository.findByIsbn("178-0441013593")).thenReturn(Optional.empty());
+
+        Exception exception = assertThrows(LivreNonTrouveException.class, () -> {
+            livreService.getLivreByIsbn("178-0441013593");
+        });
+
+        assertTrue(exception.getMessage().contains("Livre avec l'ISBN"));
+    }
+
+    @Test
+    void getLivreByTitle_Found() {
+        when(livreRepository.findByTitle("Dune")).thenReturn(Optional.of(livre));
+
+        Livre result = livreService.getLivreByTitle("Dune");
+
+        assertNotNull(result);
+        assertEquals("Dune", result.getTitre());
+    }
+
+    @Test
+    void getLivreByTitle_notFound() {
+        when(livreRepository.findByTitle("Rune")).thenReturn(Optional.empty());
+
+        Exception exception = assertThrows(LivreNonTrouveException.class, () -> {
+            livreService.getLivreByTitle("Rune");
+        });
+
+        assertTrue(exception.getMessage().contains("Livre avec le titre"));
     }
 }
