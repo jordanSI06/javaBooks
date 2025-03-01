@@ -25,6 +25,10 @@ public class LivreService {
 
     }
 
+    public Livre getLivreByIsbn(String isbn) {
+        return livreRepository.findByIsbn(isbn).orElseThrow(() -> new LivreNonTrouveException("Livre avec l'ISBN " + isbn + " introuvable."));
+    }
+
     public Livre ajouterLivre(Livre livre) {
         return livreRepository.save(livre);
     }
