@@ -75,7 +75,7 @@ class LivreServiceTest {
 
     @Test
     void getLivreByTitle_Found() {
-        when(livreRepository.findByTitle("Dune")).thenReturn(Optional.of(livre));
+        when(livreRepository.findByTitre("Dune")).thenReturn(Optional.of(livre));
 
         Livre result = livreService.getLivreByTitle("Dune");
 
@@ -84,8 +84,8 @@ class LivreServiceTest {
     }
 
     @Test
-    void getLivreByTitle_notFound() {
-        when(livreRepository.findByTitle("Rune")).thenReturn(Optional.empty());
+    void getLivreByTitre_notFound() {
+        when(livreRepository.findByTitre("Rune")).thenReturn(Optional.empty());
 
         Exception exception = assertThrows(LivreNonTrouveException.class, () -> {
             livreService.getLivreByTitle("Rune");

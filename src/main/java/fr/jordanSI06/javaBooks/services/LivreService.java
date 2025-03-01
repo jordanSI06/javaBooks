@@ -30,7 +30,7 @@ public class LivreService {
     }
 
     public Livre getLivreByTitle(String titre) {
-        return livreRepository.findByTitle(titre).orElseThrow(() -> new LivreNonTrouveException("Livre avec le titre " + titre + " introuvable."));
+        return livreRepository.findByTitre(titre).orElseThrow(() -> new LivreNonTrouveException("Livre avec le titre " + titre + " introuvable."));
     }
 
     public Livre ajouterLivre(Livre livre) {
