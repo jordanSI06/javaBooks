@@ -106,5 +106,15 @@ class LivreControllerTest {
             .andReturn();
 
     System.out.println("Response JSON : " + result.getResponse().getContentAsString());
-}
+    }
+
+    @Test
+    void testCreerLivre_ChampsInvalides() throws Exception {
+        LivreDTO livreDTO = new LivreDTO(110L, "", "", "");  
+    
+        mockMvc.perform(post("/api/livres")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(livreDTO)))
+                .andExpect(status().isBadRequest());
+    }
 }

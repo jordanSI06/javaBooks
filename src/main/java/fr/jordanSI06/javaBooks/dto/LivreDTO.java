@@ -1,7 +1,7 @@
 package fr.jordanSI06.javaBooks.dto;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 public record LivreDTO(
     Long id,
