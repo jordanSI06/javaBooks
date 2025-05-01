@@ -5,9 +5,11 @@ import fr.jordanSI06.javaBooks.exceptions.LivreNonTrouveException;
 import fr.jordanSI06.javaBooks.models.DVD;
 import fr.jordanSI06.javaBooks.models.Livre;
 import fr.jordanSI06.javaBooks.repositories.DVDRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class DVDService {
     private final DVDRepository dvdRepository;
 
